@@ -1,0 +1,7 @@
+{
+  "name": "Chatsy",
+  "description": "A Great Node.js chat application",
+  "repository": "https://bitbucket.org/jesusoterogomez/chatsy",
+  "logo": "http://i.imgur.com/iuyRmrU.png",
+  "keywords": ["node", "chat", "express", "static"]
+}

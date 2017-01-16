@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8">
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width">
+	<link rel="shortcut icon" href="favicon.png"/>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="jquery.titlealert.js"></script>
+	<script src="jquery.linkify.min.js"></script>
+
+
+	<link rel="stylesheet" type="text/css" href="reset.css">
+	
+	<link href='//fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	<link href='fonts/flaticon.css' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Chattsy</title>
+
+</head>
+<body>
+
+	<div class="quickControls">
+		<span id="notifications" class="icon-alarm"></span>
+		<span id="sounds" class="icon-volume"></span>
+	</div>
+	<img class="logo" src="logo.png">
+
+<!-- 	<div class="login">
+		<form>
+			<input type="text" class="name" placeholder="What's your name?"></input>
+			<button>Enter</button>
+
+		</form>
+	</div> -->
+
+	<div class="register">
+		<form>
+			<input type="text" class="name" placeholder="Pick your username"></input>
+			<input type="text" class="userid" placeholder="What's your name?"></input>
+			<input type="email" class="email" placeholder="What's your email?"></input>
+			<input type="password" class="password" placeholder="Type in your password"></input>
+
+			<button>Enter</button>
+			<a class="signin" href="#">Or Sign in.</a>
+
+		</form>
+	</div>
+
+
+	<div class="login">
+		<form>
+
+			<input type="text" class="userid" placeholder="Enter your username"></input>
+
+			<input type="password" class="password" placeholder="Type in your password"></input>
+
+			<button>Enter</button>
+			<a class="signup" href="#">Or create an account</a>
+
+		</form>
+	</div>
+
+
+
+	<div class="sidebar">
+		<div class="menu">
+			<ul>
+				<li class="conversations selected"><span class="icon icon-comment"></span></li>
+				<li class="contacts"><span class="icon icon-user"></span></li>
+				<li class="recent"><span class="icon icon-clock"></span></li>
+				<li class="settings"><span class="icon icon-settings"></span></li>
+			</ul>
+		</div>
+
+		<div class="userlist">
+			<ul>
+				
+			</ul>
+		</div>
+
+	</div>
+	<div class="chatwindow">
+
+		<!-- <div class="contacts">
+	</div> -->
+	<div class="messages-wrapper">
+		<div class="messages">
+			<ul></ul>
+		</div>
+	</div>
+	<form class="send">
+		<div class="sendwrapper">
+			<!-- <input id="m" autocomplete="off"/> -->
+			<div id="mwrapper">
+				<input id="m" placeholder="Enter your message" autocomplete="off"></input>
+			</div>
+			<button>Send</button>
+		</div>
+	</form>
+</div>
+
+</body>
+<script src="notify.js"></script>
+<script src="chat.js"></script>
+
+<script>
+
+</script>
+
+
+
+<script type="text/javascript">
+
+
+
+
+
+</script>
+</html>
