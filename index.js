@@ -9,7 +9,7 @@ var server = http;
 var mongodb = require('mongodb');
 
 var mongourl = '...';
-, MongoClient = mongodb.MongoClient
+ MongoClient = mongodb.MongoClient
 
 app.use(express.cookieParser());
 app.use(express.session({secret: 'test'}));
@@ -46,44 +46,63 @@ io.on('connection', function(socket) {
     socket.on('user login', function(data){
         console.log(data);
 
-        MongoClient.connect(mongourl, function(err, db) {
+        socket.emit('login result',{
+            uid:data.uid,
+            name: data.uid,
+            email: data.uid,
+            logged:true});
+        console.log(data.uid +' - connected');
+        socket.uid = data.uid;
+        addUser(data.uid, data.uid ,socket.id, 'online');
 
-            var collection = db.collection('users')
-            var query = '';
-            query = {uid:data.uid, pw:data.pw};
+        io.emit('userlist update', { list: users });
+        return;
 
-            collection.findOne(query, function(err, doc) {
-                if (err) {
-                    return console.error(err)
-                }
-                else{
-                    if(doc != null){
-                        socket.emit('login result',{
-                            uid:doc.uid,
-                            name:doc.name,
-                            email:doc.email,
-                            logged:true});
-                        console.log(doc.uid +' - connected');
-                        socket.uid = doc.uid;
-                        addUser(doc.uid,doc.name,socket.id, 'online');
-
-                        io.emit('userlist update', { list: users });
-                        return;
-                    }
-                    else{
-                        socket.emit('login result',{
-                            logged:false
-                        })
-                        return;
-                    }
-
-                }
-
-            });
+        // return socket.emit('login result',{
+        //             uid:data.uid,
+        //             name:'test',
+        //             email: 'test',
+        //             logged:true});
 
 
+        // MongoClient.connect(mongourl, function(err, db) {
 
-        });
+        //     var collection = db.collection('users')
+        //     var query = '';
+        //     query = {uid:data.uid, pw:data.pw};
+
+        //     collection.findOne(query, function(err, doc) {
+        //         if (err) {
+        //             return console.error(err)
+        //         }
+        //         else{
+        //             if(doc != null){
+        //                 socket.emit('login result',{
+        //                     uid:doc.uid,
+        //                     name:doc.name,
+        //                     email:doc.email,
+        //                     logged:true});
+        //                 console.log(doc.uid +' - connected');
+        //                 socket.uid = doc.uid;
+        //                 addUser(doc.uid,doc.name,socket.id, 'online');
+
+        //                 io.emit('userlist update', { list: users });
+        //                 return;
+        //             }
+        //             else{
+        //                 socket.emit('login result',{
+        //                     logged:false
+        //                 })
+        //                 return;
+        //             }
+
+        //         }
+
+        //     });
+
+
+
+        // });
 
 
     })
@@ -134,66 +153,67 @@ function addUser(userid, username, socket, status){
     users.push(newuser);
 
 }
-function dbexists(col,query){
-    console.log("run exists");
-    var results = [];
-    var mongourl = '...';
-    var mongodb = require('mongodb')
-    , MongoClient = mongodb.MongoClient
 
-    MongoClient.connect(mongourl, function(err, db) {
+// function dbexists(col,query){
+//     console.log("run exists");
+//     var results = [];
+//     var mongourl = '...';
+//     var mongodb = require('mongodb')
+//     , MongoClient = mongodb.MongoClient
 
-        var collection = db.collection(col)
+//     MongoClient.connect(mongourl, function(err, db) {
 
-
-        collection.findOne(query, function(err, doc) {
-            http.emit('login result',doc);
-            return;
-        });
-    })
+//         var collection = db.collection(col)
 
 
-}
+//         collection.findOne(query, function(err, doc) {
+//             http.emit('login result',doc);
+//             return;
+//         });
+//     })
 
 
-// Currently unused.
-function dbquery(col,query){
-    var results = [];
-    var mongourl = '{redacted}';
-    var mongodb = require('mongodb')
-    , MongoClient = mongodb.MongoClient
-
-    MongoClient.connect(mongourl, function(err, db) {
-
-        var collection = db.collection(col)
-        collection.find(query).toArray(function(err, docs) {
-            if (err) {
-                return console.error(err)
-            }
-            docs.forEach(function(doc) {
-                // console.log('found document: ', doc)
-                // results.push(doc);
-            })
-            // return results;
-        })
-    })
+// }
 
 
-}
+// // Currently unused.
+// function dbquery(col,query){
+//     var results = [];
+//     var mongourl = '{redacted}';
+//     var mongodb = require('mongodb')
+//     , MongoClient = mongodb.MongoClient
 
-function dbinsert(col, doc){
+//     MongoClient.connect(mongourl, function(err, db) {
 
-    MongoClient.connect(mongourl, function(err, db) {
+//         var collection = db.collection(col)
+//         collection.find(query).toArray(function(err, docs) {
+//             if (err) {
+//                 return console.error(err)
+//             }
+//             docs.forEach(function(doc) {
+//                 // console.log('found document: ', doc)
+//                 // results.push(doc);
+//             })
+//             // return results;
+//         })
+//     })
 
-        var collection = db.collection(col)
 
-        collection.insert([doc], function(err,
-            docs) {
-            if (err) {
-                return console.error(err)
-            }
+// }
 
-        })
-    })
+// function dbinsert(col, doc){
 
-}
+//     MongoClient.connect(mongourl, function(err, db) {
+
+//         var collection = db.collection(col)
+
+//         collection.insert([doc], function(err,
+//             docs) {
+//             if (err) {
+//                 return console.error(err)
+//             }
+
+//         })
+//     })
+
+// }
